@@ -4,7 +4,9 @@ from .serializers import PostSerializers
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView,
-    RetrieveUpdateDestroyAPIView
+    RetrieveUpdateDestroyAPIView,
+    UpdateAPIView,
+    DestroyAPIView
 )
 from .models import Post
 
@@ -29,7 +31,24 @@ class PostCreateApiView(CreateAPIView):
     queryset = Post.objects.all()
 
 
-class PostDetailApiView(RetrieveUpdateDestroyAPIView):
+class PostUpdateApiView(UpdateAPIView):
+    permission_classes = [permissions.AllowAny]
     queryset = Post.objects.all()
     # authentication_classes =
     serializer_class = PostSerializers
+
+
+class PostDestroyApiView(DestroyAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = Post.objects.all()
+    # authentication_classes =
+    serializer_class = PostSerializers
+
+
+class PostDetailApiView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = Post.objects.all()
+    # authentication_classes =
+    serializer_class = PostSerializers
+
+
